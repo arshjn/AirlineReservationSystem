@@ -7,9 +7,8 @@ namespace AirlineReservationSystem.Models
 {
     public class Reservation
     {
-        int Pnr;//Passenger Name Record number
-        Flight flight;
-        string Class;
-
+        public int Pnr; //Passenger Name Record number
+        public Flight flight;
+        public string Class;
     }
 }
