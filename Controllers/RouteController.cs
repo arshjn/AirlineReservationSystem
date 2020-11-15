@@ -16,9 +16,9 @@ namespace AirlineReservationSystem.Controllers
         AirRoutes airRoutes = new AirRoutes();
 
         [HttpGet]
-        public double GetFare (string source, string destination)
+        public double GetFare (string source, string destination, string Class)
         {
-            return Math.Round(airRoutes.CalculateFare(source, destination),2);
+            return Math.Round(airRoutes.CalculateFare(source, destination, Class),2);
         }
 
         [HttpGet]

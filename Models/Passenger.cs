@@ -5,12 +5,10 @@ using System.Web;
 
 namespace AirlineReservationSystem.Models
 {
-    public class Reservation
+    public class Passenger
     {
-        public int Pnr; //Passenger Name Record number
-        public int flightID;
-        public string Class;
         public string FirstName;
         public string LastName;
+        public string Nationality;
     }
 }
