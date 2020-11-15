@@ -66,7 +66,20 @@ namespace AirlineReservationSystem.Gateways
             return dests;
         }
 
-        public double CalculateFare(string Scode, string Dcode)
+        public double CalculateFare(string Scode, string Dcode, string Class)
+        {
+            double price = CalculateBaseFare(Scode, Dcode);
+            if (Class == "B"){
+                price *= 1.8;
+            }
+            else if (Class.Equals("F"))
+            {
+                price *= 2.5;
+            }
+            return price;
+        }
+
+        public double CalculateBaseFare(string Scode, string Dcode)
         {
             Destination Source = Destinations.Where(n => n.Code == Scode).FirstOrDefault();
             Destination Dest = Destinations.Where(n => n.Code == Dcode).FirstOrDefault();

@@ -8,8 +8,8 @@ namespace AirlineReservationSystem.Models
     public class Flight
     {
         public int FlightID;
-        public Destination Source;
-        public Destination destination;
+        public string SourceCode;
+        public string DestinationCode;
         public DateTime departure;
         public DateTime arrival;
         
