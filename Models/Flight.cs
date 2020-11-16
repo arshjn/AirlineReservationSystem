@@ -12,6 +12,5 @@ namespace AirlineReservationSystem.Models
         public string DestinationCode;
         public DateTime departure;
         public DateTime arrival;
-        
     }
 }

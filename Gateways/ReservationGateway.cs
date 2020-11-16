@@ -10,6 +10,35 @@ namespace AirlineReservationSystem.Gateways
     public class ReservationGateway
     {
 
+        public Reservation CheckReservation(int pnr)
+        {
+            DatabaseConnection DBconnect = new DatabaseConnection();
+            Reservation reservation1 = new Reservation();
+            if (DBconnect.OpenConnection())
+            {
+                string query = "Select * from reservations where PNR = '" + pnr + "'";
+                MySqlCommand cmd = new MySqlCommand(query, DBconnect.connection);
+                using (MySqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        Reservation reservation = new Reservation
+                        {
+                            Pnr = pnr,
+                            flightID = (int)reader["FlightID"],
+                            FirstName = (string)reader["FirstName"],
+                            LastName = (string)reader["LastName"],
+                            Class = (string)reader["Class"]
+                        };
+                        reservation1 = reservation;
+                    }
+                }
+                DBconnect.CloseConnection();
+            }
+            return reservation1;
+
+        }
+
         //Returns PNR after creating new reservation
         public int newReservation(string passengerFname, string passengerLname, int flightID, string Class)
         {
@@ -34,21 +63,21 @@ namespace AirlineReservationSystem.Gateways
                 DBconnect.CloseConnection();
             }
         }
-        bool checkPNR(int pnr)
+        public bool checkPNR(int pnr)
         {
             DatabaseConnection DBconnect = new DatabaseConnection();
             if (DBconnect.OpenConnection())
             {
-                string query = "Select PNR, FlightID from reservations where PNR = '" + pnr + "'";
+                string query = "Select * from reservations where PNR = '" + pnr + "';";
                 MySqlCommand cmd = new MySqlCommand(query, DBconnect.connection);
-                int x = cmd.ExecuteNonQuery();
-                if (x > 0)
+                var x = cmd.ExecuteScalar();
+                if (x == null)
                 {
-                    return true;
+                    return false;
                 }
                 DBconnect.CloseConnection();
             }
-            return false;
+            return true;
         }
     }
 }

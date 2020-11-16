@@ -1,4 +1,5 @@
 ﻿using AirlineReservationSystem.Gateways;
+using AirlineReservationSystem.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +16,20 @@ namespace AirlineReservationSystem.Controllers
         public int NewReservation(int flightId, string firstName, string lastName, string Class)
         {
             return reservationGateway.newReservation(firstName, lastName, flightId, Class);
+        }
+
+        [HttpGet]
+        [Route("api/checkReservation")]
+        public Reservation CheckReservation(int pnr)
+        {
+            return reservationGateway.CheckReservation(pnr);
+        }
+        
+        [HttpGet]
+        [Route("api/DoesReservationExist")]
+        public bool ReservationExists (int pnr)
+        {
+            return reservationGateway.checkPNR(pnr);
         }
     }
 }
